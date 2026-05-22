@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Lock, Clock } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatLessonType } from "@/lib/lessons";
 import type { LessonCard as LessonCardType } from "@/types/lesson";
 import { cn } from "@/lib/utils";
 
@@ -16,9 +16,12 @@ type Props = {
 };
 
 export function LessonCard({ lesson, locked = false, href }: Props) {
+  const t = useTranslations("lessonTypes");
+  const tLesson = useTranslations("lesson");
+  const tArchive = useTranslations("archive");
   const target = href ?? (locked ? undefined : `/archive/${lesson.slug}`);
 
-  const content = (
+  const card = (
     <Card
       className={cn(
         "border-border/60 bg-card/80 backdrop-blur transition-colors",
@@ -36,13 +39,13 @@ export function LessonCard({ lesson, locked = false, href }: Props) {
           ) : (
             <span className="flex items-center gap-1 text-xs text-muted-foreground">
               <Clock className="size-3" aria-hidden />
-              {lesson.estimatedReadMinutes ?? 3} min
+              {tLesson("minRead", { minutes: lesson.estimatedReadMinutes ?? 3 })}
             </span>
           )}
         </div>
         <CardTitle className="font-heading text-lg leading-snug">{lesson.title}</CardTitle>
         <p className="text-xs uppercase tracking-wider text-muted-foreground">
-          {formatLessonType(lesson.lessonType)} · Week {lesson.week}
+          {t(lesson.lessonType as "character")} · {tArchive("week", { week: lesson.week })}
         </p>
       </CardHeader>
       <CardContent>
@@ -54,15 +57,18 @@ export function LessonCard({ lesson, locked = false, href }: Props) {
   if (!target) {
     return (
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-        {content}
+        {card}
       </motion.div>
     );
   }
 
   return (
     <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
-      <Link href={target} className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-xl">
-        {content}
+      <Link
+        href={target}
+        className="block rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+      >
+        {card}
       </Link>
     </motion.div>
   );

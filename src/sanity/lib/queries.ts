@@ -1,7 +1,11 @@
 import { defineQuery } from "next-sanity";
 
+/** Matches documents for locale; legacy docs without locale count as English. */
+export const LOCALE_FILTER = `(locale == $locale || (!defined(locale) && $locale == "en"))`;
+
 export const LESSON_CARD_FIELDS = `{
   _id,
+  locale,
   title,
   "slug": slug.current,
   lessonNumber,
@@ -20,6 +24,7 @@ export const LESSON_CARD_FIELDS = `{
 
 export const LESSON_DETAIL_FIELDS = `{
   _id,
+  locale,
   title,
   "slug": slug.current,
   lessonNumber,
@@ -52,19 +57,19 @@ export const LESSON_DETAIL_FIELDS = `{
 }`;
 
 export const ALL_LESSONS_QUERY = defineQuery(
-  `*[_type == "lesson"] | order(lessonNumber asc) ${LESSON_CARD_FIELDS}`
+  `*[_type == "lesson" && ${LOCALE_FILTER}] | order(lessonNumber asc) ${LESSON_CARD_FIELDS}`
 );
 
 export const LESSON_BY_SLUG_QUERY = defineQuery(
-  `*[_type == "lesson" && slug.current == $slug][0] ${LESSON_DETAIL_FIELDS}`
+  `*[_type == "lesson" && slug.current == $slug && ${LOCALE_FILTER}][0] ${LESSON_DETAIL_FIELDS}`
 );
 
 export const LESSON_BY_NUMBER_QUERY = defineQuery(
-  `*[_type == "lesson" && lessonNumber == $lessonNumber][0] ${LESSON_DETAIL_FIELDS}`
+  `*[_type == "lesson" && lessonNumber == $lessonNumber && ${LOCALE_FILTER}][0] ${LESSON_DETAIL_FIELDS}`
 );
 
 export const CHARACTERS_QUERY = defineQuery(
-  `*[_type == "character"] | order(name asc) {
+  `*[_type == "character" && ${LOCALE_FILTER}] | order(name asc) {
     _id,
     name,
     "slug": slug.current,
@@ -75,7 +80,7 @@ export const CHARACTERS_QUERY = defineQuery(
 );
 
 export const CHARACTER_BY_SLUG_QUERY = defineQuery(
-  `*[_type == "character" && slug.current == $slug][0] {
+  `*[_type == "character" && slug.current == $slug && ${LOCALE_FILTER}][0] {
     _id,
     name,
     "slug": slug.current,

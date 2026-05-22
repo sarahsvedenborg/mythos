@@ -1,14 +1,22 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { LessonCard } from "@/components/lesson-card";
 import { PageHeader } from "@/components/page-header";
 import { getReleasedLessons, isLessonUnlocked } from "@/lib/lessons";
+import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
 import { ALL_LESSONS_QUERY } from "@/sanity/lib/queries";
+import type { Locale } from "@/i18n/routing";
 import type { LessonCard as LessonCardType } from "@/types/lesson";
 
 export const revalidate = 60;
 
 export default async function ArchivePage() {
-  const lessons = await client.fetch<LessonCardType[]>(ALL_LESSONS_QUERY);
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("archive");
+  const lessons = await client.fetch<LessonCardType[]>(
+    ALL_LESSONS_QUERY,
+    queryParams(locale)
+  );
   const released = getReleasedLessons(lessons);
   const locked = lessons.filter((l) => !isLessonUnlocked(l));
 
@@ -25,17 +33,19 @@ export default async function ArchivePage() {
   return (
     <div>
       <PageHeader
-        title="Archive"
-        subtitle={`${released.length} lessons unlocked · ${locked.length} still to come`}
+        title={t("title")}
+        subtitle={t("subtitle", { released: released.length, locked: locked.length })}
       />
 
       {weeks.length === 0 ? (
-        <p className="text-muted-foreground">No lessons in the archive yet.</p>
+        <p className="text-muted-foreground">{t("empty")}</p>
       ) : (
         <div className="space-y-10">
           {weeks.map((week) => (
             <section key={week}>
-              <h2 className="font-heading mb-4 text-lg text-gold">Week {week}</h2>
+              <h2 className="font-heading mb-4 text-lg text-gold">
+                {t("week", { week })}
+              </h2>
               <div className="space-y-3">
                 {byWeek[week]
                   .sort((a, b) => a.lessonNumber - b.lessonNumber)
@@ -50,14 +60,14 @@ export default async function ArchivePage() {
 
       {locked.length > 0 && (
         <section className="mt-12">
-          <h2 className="font-heading mb-4 text-lg text-muted-foreground">Locked</h2>
+          <h2 className="font-heading mb-4 text-lg text-muted-foreground">{t("locked")}</h2>
           <div className="space-y-3">
             {locked.slice(0, 8).map((lesson) => (
               <LessonCard key={lesson._id} lesson={lesson} locked />
             ))}
             {locked.length > 8 && (
               <p className="text-center text-sm text-muted-foreground">
-                +{locked.length - 8} more lessons waiting to unlock
+                {t("lockedMore", { count: locked.length - 8 })}
               </p>
             )}
           </div>

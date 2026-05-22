@@ -1,21 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { BookOpen, Compass, Home, BarChart3, Settings } from "lucide-react";
+import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
-const links = [
-  { href: "/today", label: "Today", icon: Home },
-  { href: "/archive", label: "Archive", icon: BookOpen },
-  { href: "/explore", label: "Explore", icon: Compass },
-  { href: "/progress", label: "Progress", icon: BarChart3 },
-  { href: "/settings", label: "Settings", icon: Settings },
-];
-
 export function BottomNav() {
+  const t = useTranslations("nav");
   const pathname = usePathname();
-  if (pathname.startsWith("/studio")) return null;
+
+  const links = [
+    { href: "/today" as const, label: t("today"), icon: Home },
+    { href: "/archive" as const, label: t("archive"), icon: BookOpen },
+    { href: "/explore" as const, label: t("explore"), icon: Compass },
+    { href: "/progress" as const, label: t("progress"), icon: BarChart3 },
+    { href: "/settings" as const, label: t("settings"), icon: Settings },
+  ];
 
   return (
     <nav

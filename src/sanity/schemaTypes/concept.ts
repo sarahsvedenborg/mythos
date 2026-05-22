@@ -1,10 +1,12 @@
 import { defineField, defineType } from "sanity";
+import { localeField } from "./locale";
 
 export const concept = defineType({
   name: "concept",
   title: "Concept",
   type: "document",
   fields: [
+    localeField,
     defineField({
       name: "term",
       title: "Term",

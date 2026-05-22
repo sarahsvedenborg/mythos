@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { localeField } from "./locale";
 
 const categories = [
   { title: "Cosmos & Titans", value: "cosmos" },
@@ -25,6 +26,7 @@ export const lesson = defineType({
   title: "Lesson",
   type: "document",
   fields: [
+    localeField,
     defineField({
       name: "title",
       title: "Title",
@@ -167,12 +169,14 @@ export const lesson = defineType({
       lessonNumber: "lessonNumber",
       week: "week",
       day: "day",
+      locale: "locale",
       media: "image",
     },
-    prepare({ title, lessonNumber, week, day, media }) {
+    prepare({ title, lessonNumber, week, day, locale, media }) {
+      const lang = locale === "no" ? "NO" : "EN";
       return {
         title: `${lessonNumber}. ${title}`,
-        subtitle: `Week ${week} · Day ${day}`,
+        subtitle: `${lang} · Week ${week} · Day ${day}`,
         media,
       };
     },

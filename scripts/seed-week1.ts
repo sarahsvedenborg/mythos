@@ -149,6 +149,7 @@ async function seed() {
     const unlockDate = getUnlockDateForLesson(lesson.lessonNumber).toISOString();
     const doc = {
       _type: "lesson",
+      locale: "en",
       ...lesson,
       slug: { _type: "slug", current: lesson.slug },
       estimatedReadMinutes: 3,
@@ -156,9 +157,9 @@ async function seed() {
       publishedAt: unlockDate,
     };
 
-    const existing = await client.fetch(
-      `*[_type == "lesson" && lessonNumber == $n][0]._id`,
-      { n: lesson.lessonNumber }
+    const existing = await client.fetch<string | null>(
+      `*[_type == "lesson" && lessonNumber == $n && locale == $locale][0]._id`,
+      { n: lesson.lessonNumber, locale: "en" }
     );
 
     if (existing) {

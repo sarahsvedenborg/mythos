@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { localeField } from "./locale";
 
 const characterTypes = [
   { title: "God", value: "god" },
@@ -14,6 +15,7 @@ export const character = defineType({
   title: "Character",
   type: "document",
   fields: [
+    localeField,
     defineField({
       name: "name",
       title: "Name",
