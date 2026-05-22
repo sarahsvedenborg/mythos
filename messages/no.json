@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "title": "Mythos — Lær gresk mytologi daglig",
+    "description": "En rolig, samlevennlig app for å lære gresk mytologi — guder, helter, monstre og myter på under tre minutter."
+  },
+  "brand": "Mythos",
+  "nav": {
+    "today": "I dag",
+    "archive": "Arkiv",
+    "explore": "Utforsk",
+    "progress": "Fremgang",
+    "settings": "Innstillinger"
+  },
+  "language": {
+    "label": "Språk",
+    "en": "Engelsk",
+    "no": "Norsk"
+  },
+  "today": {
+    "title": "Dagens leksjon",
+    "subtitleWeekday": "Én myte om gangen. Under tre minutter.",
+    "subtitleWeekend": "Helger er for repetisjon — bla i arkivet eller les favoritter på nytt.",
+    "streakTitle": "Streak-sporing",
+    "streakComing": "Kommer i fase 3",
+    "readLesson": "Les leksjon",
+    "emptyTitle": "Ingen leksjon publisert ennå",
+    "emptyBody": "Legg til leksjoner i Sanity Studio, eller kjør seed-skriptet for uke 1.",
+    "openStudio": "Åpne Studio"
+  },
+  "archive": {
+    "title": "Arkiv",
+    "subtitle": "{released} leksjoner låst opp · {locked} gjenstår",
+    "empty": "Ingen leksjoner i arkivet ennå.",
+    "week": "Uke {week}",
+    "locked": "Låst",
+    "lockedMore": "+{count} flere leksjoner venter på opplåsing"
+  },
+  "lesson": {
+    "lockedTitle": "Denne leksjonen er fortsatt låst",
+    "lockedBody": "Den låses opp {date}.",
+    "backToArchive": "Tilbake til arkiv",
+    "archive": "Arkiv",
+    "lessonLabel": "Leksjon {number}",
+    "week": "Uke {week}",
+    "pronunciation": "Uttale: {text}",
+    "readTime": "{weekday} · ~{minutes} min lesing",
+    "theLesson": "Leksjonen",
+    "whyItMatters": "Hvorfor det betyr noe",
+    "keyTakeaway": "Nøkkelinnsikt",
+    "relatedLessons": "Relaterte leksjoner",
+    "minRead": "{minutes} min"
+  },
+  "explore": {
+    "title": "Utforsk",
+    "subtitle": "Skikkelser, steder og begreper fra mytene.",
+    "allCharacters": "Alle skikkelser",
+    "gods": "Guder",
+    "heroes": "Helter",
+    "monsters": "Monstre",
+    "browsePantheon": "Bla i panteonet",
+    "featured": "Utvalgte",
+    "empty": "Legg til skikkelser i Studio for å fylle Utforsk.",
+    "charactersTitle": "Skikkelser",
+    "charactersCount": "{count} i panteonet",
+    "noCharacters": "Ingen skikkelser ennå. Legg dem til i Studio.",
+    "entriesCount": "{count} oppføringer"
+  },
+  "progress": {
+    "title": "Fremgang",
+    "subtitle": "Lokal streak og fullføring kommer i fase 3.",
+    "lessonsUnlocked": "Leksjoner låst opp",
+    "ofCurriculum": "{pct}% av årets pensum",
+    "currentStreak": "Nåværende streak",
+    "phase3": "Aktiveres i fase 3"
+  },
+  "settings": {
+    "title": "Innstillinger",
+    "subtitle": "Preferanser og installasjon.",
+    "languageTitle": "Språk",
+    "installTitle": "Installer Mythos",
+    "installBody": "Legg Mythos på hjemskjermen på iPhone for en app-lignende opplevelse med offline-støtte.",
+    "installGuide": "Installasjonsveiledning",
+    "studioTitle": "Innholdsstudio",
+    "openStudio": "Åpne Sanity Studio →"
+  },
+  "install": {
+    "title": "Installer Mythos",
+    "subtitle": "Få daglige mytleksjoner fra hjemskjermen.",
+    "step1": "Åpne Mythos i Safari på iPhone.",
+    "step2": "Trykk på Del-knappen nederst på skjermen.",
+    "step3": "Velg «Legg til på Hjem-skjerm».",
+    "step4": "Trykk «Legg til» — Mythos vises som en egen app.",
+    "footer": "Etter installasjon kan leksjoner du har åpnet leses offline (fase 4 utvider caching)."
+  },
+  "lessonTypes": {
+    "character": "Skikkelse",
+    "story": "Fortelling",
+    "concept": "Begrep",
+    "entity": "Monster / Sted",
+    "theme": "Tema"
+  },
+  "weekdays": {
+    "1": "Mandag",
+    "2": "Tirsdag",
+    "3": "Onsdag",
+    "4": "Torsdag",
+    "5": "Fredag"
+  }
+}

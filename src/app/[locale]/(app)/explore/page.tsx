@@ -1,28 +1,33 @@
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
 import { CHARACTERS_QUERY } from "@/sanity/lib/queries";
+import type { Locale } from "@/i18n/routing";
 import type { CharacterSummary } from "@/types/lesson";
 
 export const revalidate = 60;
 
-const categories = [
-  { href: "/explore/characters", label: "All characters", filter: null },
-  { href: "/explore/gods", label: "Gods", filter: "god" },
-  { href: "/explore/heroes", label: "Heroes", filter: "hero" },
-  { href: "/explore/monsters", label: "Monsters", filter: "monster" },
-];
-
 export default async function ExplorePage() {
-  const characters = await client.fetch<CharacterSummary[]>(CHARACTERS_QUERY);
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("explore");
+  const characters = await client.fetch<CharacterSummary[]>(
+    CHARACTERS_QUERY,
+    queryParams(locale)
+  );
+
+  const categories = [
+    { href: "/explore/characters" as const, label: t("allCharacters") },
+    { href: "/explore/gods" as const, label: t("gods") },
+    { href: "/explore/heroes" as const, label: t("heroes") },
+    { href: "/explore/monsters" as const, label: t("monsters") },
+  ];
 
   return (
     <div>
-      <PageHeader
-        title="Explore"
-        subtitle="Characters, places, and concepts from the myths."
-      />
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
       <div className="mb-8 grid gap-3 sm:grid-cols-2">
         {categories.map(({ href, label }) => (
@@ -32,7 +37,7 @@ export default async function ExplorePage() {
                 <CardTitle className="text-base">{label}</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground">
-                Browse the pantheon
+                {t("browsePantheon")}
               </CardContent>
             </Card>
           </Link>
@@ -41,7 +46,7 @@ export default async function ExplorePage() {
 
       {characters.length > 0 ? (
         <section>
-          <h2 className="font-heading mb-4 text-lg text-gold">Featured</h2>
+          <h2 className="font-heading mb-4 text-lg text-gold">{t("featured")}</h2>
           <ul className="space-y-2">
             {characters.slice(0, 6).map((c) => (
               <li key={c._id}>
@@ -57,9 +62,7 @@ export default async function ExplorePage() {
           </ul>
         </section>
       ) : (
-        <p className="text-sm text-muted-foreground">
-          Add characters in Studio to populate Explore.
-        </p>
+        <p className="text-sm text-muted-foreground">{t("empty")}</p>
       )}
     </div>
   );

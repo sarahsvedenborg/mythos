@@ -1,10 +1,12 @@
 import { defineField, defineType } from "sanity";
+import { localeField } from "./locale";
 
 export const location = defineType({
   name: "location",
   title: "Location",
   type: "document",
   fields: [
+    localeField,
     defineField({
       name: "name",
       title: "Name",

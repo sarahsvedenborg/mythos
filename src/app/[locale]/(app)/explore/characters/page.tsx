@@ -1,17 +1,28 @@
-import Link from "next/link";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { PageHeader } from "@/components/page-header";
+import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
 import { CHARACTERS_QUERY } from "@/sanity/lib/queries";
+import type { Locale } from "@/i18n/routing";
 import type { CharacterSummary } from "@/types/lesson";
 
 export const revalidate = 60;
 
 export default async function CharactersPage() {
-  const characters = await client.fetch<CharacterSummary[]>(CHARACTERS_QUERY);
+  const locale = (await getLocale()) as Locale;
+  const t = await getTranslations("explore");
+  const characters = await client.fetch<CharacterSummary[]>(
+    CHARACTERS_QUERY,
+    queryParams(locale)
+  );
 
   return (
     <div>
-      <PageHeader title="Characters" subtitle={`${characters.length} in the pantheon`} />
+      <PageHeader
+        title={t("charactersTitle")}
+        subtitle={t("charactersCount", { count: characters.length })}
+      />
       <ul className="space-y-2">
         {characters.map((c) => (
           <li key={c._id}>
@@ -26,7 +37,7 @@ export default async function CharactersPage() {
         ))}
       </ul>
       {characters.length === 0 && (
-        <p className="text-muted-foreground">No characters yet. Add them in Studio.</p>
+        <p className="text-muted-foreground">{t("noCharacters")}</p>
       )}
     </div>
   );

@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "title": "Mythos — Learn Greek Mythology Daily",
+    "description": "A calm, collectible daily app for learning Greek mythology — gods, heroes, monsters, and myths in under three minutes."
+  },
+  "brand": "Mythos",
+  "nav": {
+    "today": "Today",
+    "archive": "Archive",
+    "explore": "Explore",
+    "progress": "Progress",
+    "settings": "Settings"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "no": "Norwegian"
+  },
+  "today": {
+    "title": "Today's lesson",
+    "subtitleWeekday": "One myth at a time. Under three minutes.",
+    "subtitleWeekend": "Weekends are for review — browse the archive or revisit favorites.",
+    "streakTitle": "Streak tracking",
+    "streakComing": "Coming in Phase 3",
+    "readLesson": "Read lesson",
+    "emptyTitle": "No lesson published yet",
+    "emptyBody": "Add lessons in Sanity Studio, or run the seed script for Week 1 samples.",
+    "openStudio": "Open Studio"
+  },
+  "archive": {
+    "title": "Archive",
+    "subtitle": "{released} lessons unlocked · {locked} still to come",
+    "empty": "No lessons in the archive yet.",
+    "week": "Week {week}",
+    "locked": "Locked",
+    "lockedMore": "+{count} more lessons waiting to unlock"
+  },
+  "lesson": {
+    "lockedTitle": "This lesson is still locked",
+    "lockedBody": "It unlocks on {date}.",
+    "backToArchive": "Back to archive",
+    "archive": "Archive",
+    "lessonLabel": "Lesson {number}",
+    "week": "Week {week}",
+    "pronunciation": "Pronunciation: {text}",
+    "readTime": "{weekday} · ~{minutes} min read",
+    "theLesson": "The lesson",
+    "whyItMatters": "Why it matters",
+    "keyTakeaway": "Key takeaway",
+    "relatedLessons": "Related lessons",
+    "minRead": "{minutes} min"
+  },
+  "explore": {
+    "title": "Explore",
+    "subtitle": "Characters, places, and concepts from the myths.",
+    "allCharacters": "All characters",
+    "gods": "Gods",
+    "heroes": "Heroes",
+    "monsters": "Monsters",
+    "browsePantheon": "Browse the pantheon",
+    "featured": "Featured",
+    "empty": "Add characters in Studio to populate Explore.",
+    "charactersTitle": "Characters",
+    "charactersCount": "{count} in the pantheon",
+    "noCharacters": "No characters yet. Add them in Studio.",
+    "entriesCount": "{count} entries"
+  },
+  "progress": {
+    "title": "Progress",
+    "subtitle": "Local streaks and completion tracking arrive in Phase 3.",
+    "lessonsUnlocked": "Lessons unlocked",
+    "ofCurriculum": "{pct}% of the year curriculum",
+    "currentStreak": "Current streak",
+    "phase3": "Enable in Phase 3"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Preferences and installation.",
+    "languageTitle": "Language",
+    "installTitle": "Install Mythos",
+    "installBody": "Add Mythos to your iPhone home screen for a native, offline-ready experience.",
+    "installGuide": "Installation guide",
+    "studioTitle": "Content studio",
+    "openStudio": "Open Sanity Studio →"
+  },
+  "install": {
+    "title": "Install Mythos",
+    "subtitle": "Get daily mythology lessons from your home screen.",
+    "step1": "Open Mythos in Safari on your iPhone.",
+    "step2": "Tap the Share button at the bottom of the screen.",
+    "step3": "Choose \"Add to Home Screen\".",
+    "step4": "Tap \"Add\" — Mythos will appear like a native app.",
+    "footer": "After installing, lessons you have opened stay available offline (Phase 4 expands caching)."
+  },
+  "lessonTypes": {
+    "character": "Character",
+    "story": "Story",
+    "concept": "Concept",
+    "entity": "Monster / Place",
+    "theme": "Theme"
+  },
+  "weekdays": {
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday"
+  }
+}

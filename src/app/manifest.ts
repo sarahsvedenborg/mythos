@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Mythos — Greek Mythology",
     short_name: "Mythos",
     description: "Learn Greek mythology daily with short weekday lessons.",
-    start_url: "/today",
+    start_url: "/en/today",
     display: "standalone",
     background_color: "#0a0e1a",
     theme_color: "#0a0e1a",

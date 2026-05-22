@@ -2,6 +2,13 @@
 
 A mobile-first Progressive Web App for daily Greek mythology micro-lessons. Built with **Next.js 16**, **Sanity CMS**, **Tailwind CSS**, **shadcn/ui**, and **Framer Motion**.
 
+## Languages
+
+- **English** (`/en/...`) and **Norwegian Bokmål** (`/no/...`)
+- UI strings via `next-intl` (`messages/en.json`, `messages/no.json`)
+- Sanity content filtered by `locale` field on each document
+- Language switcher in **Settings**
+
 ## Phase 1 (current)
 
 - Next.js App Router with dark, mythology-inspired UI
@@ -37,10 +44,11 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to **Today**.
 ### Seed Week 1 sample lessons
 
 ```bash
-npm run seed:week1
+npm run seed:week1      # English
+npm run seed:week1:no   # Norwegian (Bokmål)
 ```
 
-Then publish drafts in Studio (or use the API). Lesson 1 (*Chaos*) is already published as a starter.
+Then publish drafts in Studio (or use the API). Lessons 1–5 are available in both languages when seeded and published.
 
 ### Deploy schema changes
 
