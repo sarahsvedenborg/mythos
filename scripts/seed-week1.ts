@@ -158,7 +158,7 @@ async function seed() {
     };
 
     const existing = await client.fetch<string | null>(
-      `*[_type == "lesson" && lessonNumber == $n && locale == $locale][0]._id`,
+      `*[_type == "lesson" && lessonNumber == $n && (locale == $locale || (!defined(locale) && $locale == "en"))][0]._id`,
       { n: lesson.lessonNumber, locale: "en" }
     );
 

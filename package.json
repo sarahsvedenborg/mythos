@@ -10,6 +10,10 @@
     "seed:week1": "tsx --env-file=.env.local scripts/seed-week1.ts",
     "seed:week1:no": "tsx --env-file=.env.local scripts/seed-week1-no.ts",
     "seed:quarter1": "tsx --env-file=.env.local scripts/seed-quarter1.ts",
+    "seed:quarter2": "tsx --env-file=.env.local scripts/seed-quarter2.ts",
+    "seed:explore-starter": "tsx --env-file=.env.local scripts/seed-explore-starter.ts",
+    "seed:explore-quarter3": "tsx --env-file=.env.local scripts/seed-explore-quarter3.ts",
+    "seed:quarter3": "tsx --env-file=.env.local scripts/seed-quarter3.ts",
     "sanity:deploy": "sanity schema deploy"
   },
   "dependencies": {
