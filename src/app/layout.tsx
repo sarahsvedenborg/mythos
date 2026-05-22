@@ -1,4 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import "./globals.css";
+
+const heading = Cormorant_Garamond({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const sans = DM_Sans({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+});
 
 export const metadata: Metadata = {
   applicationName: "Mythos",
@@ -27,5 +41,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return children;
+  return (
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`dark ${heading.variable} ${sans.variable} h-full`}
+    >
+      <body className="min-h-full flex flex-col bg-background font-sans antialiased">
+        {children}
+      </body>
+    </html>
+  );
 }
