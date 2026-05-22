@@ -91,6 +91,22 @@ Full outline is in the product PRD.
 | **4** | Offline lesson cache, push notifications |
 | **5** | Gamification, quizzes, audio |
 
+## App icon (PWA / home screen)
+
+Icons live in **`public/icons/`**:
+
+| File | Size | Used for |
+|------|------|----------|
+| `apple-touch-icon.png` | 180×180 | iPhone home screen (Safari “Add to Home Screen”) |
+| `icon-192.png` | 192×192 | PWA manifest, browser tab |
+| `icon-512.png` | 512×512 | PWA manifest (splash / install) |
+
+Paths are wired in `src/app/manifest.ts` and `src/app/layout.tsx`.
+
+**To change the icon:** replace those three PNGs (same filenames), redeploy, then on iPhone **remove the old home-screen shortcut and add it again** — iOS often caches the old icon.
+
+Design tips: square art, simple symbol, safe padding (~10%) for maskable crop; match `theme_color` `#0a0e1a` in the manifest for a seamless edge.
+
 ## Tech notes
 
 - **Build**: `npm run build` uses webpack (required for Serwist + Studio bundle).
