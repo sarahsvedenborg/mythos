@@ -49,3 +49,30 @@ export type CharacterSummary = {
   symbols?: string[];
   image?: SanityImage;
 };
+
+export type CharacterDetail = CharacterSummary & {
+  description?: PortableTextBlock[];
+  parents?: CharacterSummary[];
+  children?: CharacterSummary[];
+  relatedLessons?: {
+    _id: string;
+    title: string;
+    slug: string;
+    lessonNumber: number;
+  }[];
+};
+
+export type ConceptSummary = {
+  _id: string;
+  term: string;
+  slug: string;
+  definition: string;
+};
+
+export type LocationSummary = {
+  _id: string;
+  name: string;
+  slug: string;
+  myths?: string[];
+  image?: SanityImage;
+};

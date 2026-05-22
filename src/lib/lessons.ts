@@ -77,6 +77,64 @@ export function getTodaysLesson(lessons: LessonCard[], now = new Date()): Lesson
   return released[released.length - 1] ?? null;
 }
 
+/** Next weekday lesson that is still locked (for “coming soon” UI). */
+export function getNextLockedLesson(
+  lessons: LessonCard[],
+  now = new Date()
+): LessonCard | null {
+  const locked = lessons
+    .filter((l) => !isLessonUnlocked(l, now))
+    .sort((a, b) => a.lessonNumber - b.lessonNumber);
+  return locked[0] ?? null;
+}
+
+/** Start of “today” in a given IANA timezone (falls back to runtime local). */
+export function getStartOfDayInTimeZone(now = new Date(), timeZone?: string): Date {
+  if (!timeZone) return getTodayStart(now);
+
+  try {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(now);
+
+    const year = Number(parts.find((p) => p.type === "year")?.value);
+    const month = Number(parts.find((p) => p.type === "month")?.value);
+    const day = Number(parts.find((p) => p.type === "day")?.value);
+    return new Date(year, month - 1, day);
+  } catch {
+    return getTodayStart(now);
+  }
+}
+
+export function isLessonUnlockedInTimeZone(
+  lesson: Pick<LessonCard, "unlockDate" | "lessonNumber">,
+  timeZone?: string,
+  now = new Date()
+): boolean {
+  const localStart = getStartOfDayInTimeZone(now, timeZone);
+  if (lesson.unlockDate) {
+    return new Date(lesson.unlockDate) <= localStart;
+  }
+  const unlock = getUnlockDateForLesson(lesson.lessonNumber);
+  return unlock <= localStart;
+}
+
+export function formatUnlockDate(
+  unlockDate: string,
+  locale: string,
+  timeZone?: string
+): string {
+  return new Date(unlockDate).toLocaleDateString(locale === "no" ? "nb-NO" : "en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    timeZone,
+  });
+}
+
 export function formatWeekday(day: number): string {
   const names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
   return names[day - 1] ?? "";

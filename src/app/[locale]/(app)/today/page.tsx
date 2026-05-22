@@ -3,6 +3,7 @@ import { Flame } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LessonCard } from "@/components/lesson-card";
 import { PageHeader } from "@/components/page-header";
+import { TodayUnlockInfo } from "@/components/today-unlock-info";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { getTodaysLesson, isWeekend } from "@/lib/lessons";
@@ -30,6 +31,8 @@ export default async function TodayPage() {
         title={t("title")}
         subtitle={weekend ? t("subtitleWeekend") : t("subtitleWeekday")}
       />
+
+      <TodayUnlockInfo lessons={lessons} hasTodayLesson={!!today} />
 
       <div className="mb-6 flex items-center gap-3 rounded-2xl border border-gold/20 bg-gold/5 px-4 py-3">
         <Flame className="size-5 text-gold" aria-hidden />
