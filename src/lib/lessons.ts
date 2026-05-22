@@ -64,6 +64,18 @@ export function getReleasedLessons(lessons: LessonCard[], now = new Date()): Les
   return lessons.filter((lesson) => isLessonUnlocked(lesson, now));
 }
 
+/** Earliest unlocked lesson (by lesson number) not in the completed set. */
+export function getEarliestIncompleteLesson(
+  lessons: LessonCard[],
+  completedNumbers: ReadonlySet<number>,
+  now = new Date()
+): LessonCard | null {
+  const released = getReleasedLessons(lessons, now).sort(
+    (a, b) => a.lessonNumber - b.lessonNumber
+  );
+  return released.find((l) => !completedNumbers.has(l.lessonNumber)) ?? null;
+}
+
 export function getTodaysLesson(lessons: LessonCard[], now = new Date()): LessonCard | null {
   const released = getReleasedLessons(lessons, now);
   if (released.length === 0) return null;

@@ -1,12 +1,9 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
-import { LessonCard } from "@/components/lesson-card";
-import { StreakDisplay } from "@/components/streak-display";
 import { PageHeader } from "@/components/page-header";
+import { StreakDisplay } from "@/components/streak-display";
+import { TodayLesson } from "@/components/today-lesson";
 import { TodayUnlockInfo } from "@/components/today-unlock-info";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { getTodaysLesson, isWeekend } from "@/lib/lessons";
+import { isWeekend } from "@/lib/lessons";
 import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
 import { ALL_LESSONS_QUERY } from "@/sanity/lib/queries";
@@ -22,7 +19,6 @@ export default async function TodayPage() {
     ALL_LESSONS_QUERY,
     queryParams(locale)
   );
-  const today = getTodaysLesson(lessons);
   const weekend = isWeekend();
 
   return (
@@ -32,38 +28,11 @@ export default async function TodayPage() {
         subtitle={weekend ? t("subtitleWeekend") : t("subtitleWeekday")}
       />
 
-      <TodayUnlockInfo lessons={lessons} hasTodayLesson={!!today} />
+      <TodayUnlockInfo lessons={lessons} />
 
       <StreakDisplay />
 
-      {today ? (
-        <div className="space-y-4">
-          <LessonCard lesson={today} />
-          <Link
-            href={`/archive/${today.slug}`}
-            className={cn(
-              buttonVariants({ variant: "default" }),
-              "w-full bg-gold text-background hover:bg-gold/90"
-            )}
-          >
-            {t("readLesson")}
-          </Link>
-        </div>
-      ) : (
-        <div className="rounded-2xl border border-dashed border-border p-8 text-center">
-          <p className="font-heading text-lg text-marble">{t("emptyTitle")}</p>
-          <p className="mt-2 text-sm text-muted-foreground">{t("emptyBody")}</p>
-          <a
-            href="/studio"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "mt-4 inline-flex border-gold/40"
-            )}
-          >
-            {t("openStudio")}
-          </a>
-        </div>
-      )}
+      <TodayLesson lessons={lessons} />
     </div>
   );
 }
