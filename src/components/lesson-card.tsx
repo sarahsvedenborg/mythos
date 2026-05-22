@@ -2,7 +2,8 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Lock, Clock } from "lucide-react";
+import { Lock, Clock, Check, Heart } from "lucide-react";
+import { useProgressContext } from "@/components/progress-provider";
 import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +20,10 @@ export function LessonCard({ lesson, locked = false, href }: Props) {
   const t = useTranslations("lessonTypes");
   const tLesson = useTranslations("lesson");
   const tArchive = useTranslations("archive");
+  const { ready, isCompleted, isFavorite } = useProgressContext();
   const target = href ?? (locked ? undefined : `/archive/${lesson.slug}`);
+  const completed = ready && isCompleted(lesson.lessonNumber);
+  const favorite = ready && isFavorite(lesson.lessonNumber);
 
   const card = (
     <Card
@@ -34,14 +38,22 @@ export function LessonCard({ lesson, locked = false, href }: Props) {
           <Badge variant="outline" className="border-gold/30 text-gold">
             #{lesson.lessonNumber}
           </Badge>
-          {locked ? (
-            <Lock className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-          ) : (
-            <span className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Clock className="size-3" aria-hidden />
-              {tLesson("minRead", { minutes: lesson.estimatedReadMinutes ?? 3 })}
-            </span>
-          )}
+          <div className="flex shrink-0 items-center gap-2">
+            {!locked && completed && (
+              <Check className="size-4 text-gold" aria-label={tArchive("completedBadge")} />
+            )}
+            {!locked && favorite && (
+              <Heart className="size-4 fill-gold text-gold" aria-label={tArchive("favoriteBadge")} />
+            )}
+            {locked ? (
+              <Lock className="size-4 text-muted-foreground" aria-hidden />
+            ) : (
+              <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                <Clock className="size-3" aria-hidden />
+                {tLesson("minRead", { minutes: lesson.estimatedReadMinutes ?? 3 })}
+              </span>
+            )}
+          </div>
         </div>
         <CardTitle className="font-heading text-lg leading-snug">{lesson.title}</CardTitle>
         <p className="text-xs uppercase tracking-wider text-muted-foreground">

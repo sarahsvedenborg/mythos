@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArchiveBrowser } from "@/components/archive-browser";
 import { PageHeader } from "@/components/page-header";
@@ -26,11 +27,13 @@ export default async function ArchivePage() {
         title={t("title")}
         subtitle={t("subtitle", { released: released.length, locked: lockedCount })}
       />
-      <ArchiveBrowser
-        lessons={lessons}
-        releasedCount={released.length}
-        lockedCount={lockedCount}
-      />
+      <Suspense fallback={null}>
+        <ArchiveBrowser
+          lessons={lessons}
+          releasedCount={released.length}
+          lockedCount={lockedCount}
+        />
+      </Suspense>
     </div>
   );
 }

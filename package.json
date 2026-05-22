@@ -9,6 +9,7 @@
     "lint": "eslint",
     "seed:week1": "tsx --env-file=.env.local scripts/seed-week1.ts",
     "seed:week1:no": "tsx --env-file=.env.local scripts/seed-week1-no.ts",
+    "seed:quarter1": "tsx --env-file=.env.local scripts/seed-quarter1.ts",
     "sanity:deploy": "sanity schema deploy"
   },
   "dependencies": {
