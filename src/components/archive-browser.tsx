@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useProgressContext } from "@/components/progress-provider";
 import { LessonCard } from "@/components/lesson-card";
 import { FilterChips } from "@/components/filter-chips";
 import { SearchInput } from "@/components/search-input";
@@ -31,12 +33,29 @@ export function ArchiveBrowser({ lessons, releasedCount, lockedCount }: Props) {
   const t = useTranslations("archive");
   const tTypes = useTranslations("lessonTypes");
   const tCategories = useTranslations("categories");
+  const searchParams = useSearchParams();
+  const { ready, completedSet, favoritesSet } = useProgressContext();
 
   const [filters, setFilters] = useState<ArchiveFiltersState>(defaultArchiveFilters);
 
+  useEffect(() => {
+    const filter = searchParams.get("filter");
+    if (filter === "favorites" || filter === "completed") {
+      setFilters((f) => ({ ...f, availability: filter }));
+    }
+  }, [searchParams]);
+
+  const progressSets = useMemo(
+    () =>
+      ready
+        ? { completed: completedSet, favorites: favoritesSet }
+        : undefined,
+    [ready, completedSet, favoritesSet]
+  );
+
   const filtered = useMemo(
-    () => filterLessons(lessons, filters),
-    [lessons, filters]
+    () => filterLessons(lessons, filters, new Date(), progressSets),
+    [lessons, filters, progressSets]
   );
 
   const byWeek = useMemo(() => groupLessonsByWeek(filtered), [filtered]);
@@ -54,6 +73,8 @@ export function ArchiveBrowser({ lessons, releasedCount, lockedCount }: Props) {
     { value: "all", label: t("filterAll") },
     { value: "unlocked", label: t("filterUnlocked") },
     { value: "locked", label: t("filterLocked") },
+    { value: "completed", label: t("filterCompleted") },
+    { value: "favorites", label: t("filterFavorites") },
   ];
 
   const weekOptions: { value: string; label: string }[] = [

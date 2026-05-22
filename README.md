@@ -17,11 +17,19 @@ A mobile-first Progressive Web App for daily Greek mythology micro-lessons. Buil
 - Lesson rendering with Portable Text
 - PWA manifest + Serwist service worker (production)
 
-## Phase 2 (current)
+## Phase 2
 
 - **Archive**: search, filters (week, category, type, locked/unlocked), week vs category views
 - **Explore**: global search, character/concept/place detail pages, filtered god/hero/monster lists
 - **Today**: next-unlock schedule with local timezone, weekend archive prompt
+
+## Phase 3
+
+- **localStorage** progress (`mythos-progress-v1`): completed lessons + favorites
+- **Weekday streak** on Today and Progress (weekends are neutral)
+- **Lesson actions**: mark as read, add to favorites on each lesson page
+- **Archive filters**: Completed, Favorites (`/archive?filter=favorites`)
+- **Settings**: clear local progress
 
 ## Sanity project
 
@@ -45,14 +53,20 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) — redirects to **Today**.
 
-### Seed Week 1 sample lessons
+### Seed lessons into Sanity
 
 ```bash
-npm run seed:week1      # English
-npm run seed:week1:no   # Norwegian (Bokmål)
+npm run seed:week1      # Week 1 (lessons 1–5) — English
+npm run seed:week1:no   # Week 1 (lessons 1–5) — Norwegian
+npm run seed:quarter1   # Weeks 2–13 (lessons 6–65) — English + Norwegian
 ```
 
-Then publish drafts in Studio (or use the API). Lessons 1–5 are available in both languages when seeded and published.
+Requires `SANITY_API_WRITE_TOKEN` in `.env.local`. Publish any drafts in Studio after seeding.
+
+| Range | Weeks | Lessons |
+|-------|-------|---------|
+| Week 1 scripts | 1 | 1–5 |
+| Quarter 1 script | 2–13 | 6–65 |
 
 ### Deploy schema changes
 
@@ -73,7 +87,7 @@ Full outline is in the product PRD.
 | Phase | Focus |
 |-------|--------|
 | **2** | Done — archive search/filters, explore detail pages, unlock polish |
-| **3** | Streaks, favorites, localStorage progress |
+| **3** | Done — streaks, favorites, localStorage progress |
 | **4** | Offline lesson cache, push notifications |
 | **5** | Gamification, quizzes, audio |
 

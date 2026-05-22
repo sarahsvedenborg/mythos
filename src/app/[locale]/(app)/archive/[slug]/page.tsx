@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getLocale, getTranslations } from "next-intl/server";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { LessonProgressActions } from "@/components/lesson-progress-actions";
 import { LessonView } from "@/components/lesson-view";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -80,6 +81,7 @@ export default async function LessonPage({ params }: Props) {
         {t("archive")}
       </Link>
       <LessonView lesson={lesson} />
+      <LessonProgressActions lessonNumber={lesson.lessonNumber} />
     </div>
   );
 }

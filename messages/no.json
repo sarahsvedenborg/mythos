@@ -20,8 +20,10 @@
     "title": "Dagens leksjon",
     "subtitleWeekday": "Én myte om gangen. Under tre minutter.",
     "subtitleWeekend": "Helger er for repetisjon — bla i arkivet eller les favoritter på nytt.",
-    "streakTitle": "Streak-sporing",
-    "streakComing": "Kommer i fase 3",
+    "streakTitle": "Ukedag-streak",
+    "streakActive": "{count, plural, one {# ukedag på rad} other {# ukedager på rad}}",
+    "streakEmpty": "Fullfør en leksjon på en ukedag for å starte streaken.",
+    "streakCountAria": "Nåværende streak: {count} ukedager",
     "readLesson": "Les leksjon",
     "emptyTitle": "Ingen leksjon publisert ennå",
     "emptyBody": "Legg til leksjoner i Sanity Studio, eller kjør seed-skriptet for uke 1.",
@@ -47,6 +49,10 @@
     "filterAll": "Alle",
     "filterUnlocked": "Låst opp",
     "filterLocked": "Låst",
+    "filterCompleted": "Fullført",
+    "filterFavorites": "Favoritter",
+    "completedBadge": "Fullført",
+    "favoriteBadge": "Favoritt",
     "weekFilter": "Uke",
     "allWeeks": "Alle uker",
     "categoryFilter": "Kategori",
@@ -80,7 +86,11 @@
     "whyItMatters": "Hvorfor det betyr noe",
     "keyTakeaway": "Nøkkelinnsikt",
     "relatedLessons": "Relaterte leksjoner",
-    "minRead": "{minutes} min"
+    "minRead": "{minutes} min",
+    "markComplete": "Merk som lest",
+    "markedComplete": "Merket som lest",
+    "addFavorite": "Legg til favoritter",
+    "favorited": "I favoritter"
   },
   "explore": {
     "title": "Utforsk",
@@ -117,11 +127,17 @@
   },
   "progress": {
     "title": "Fremgang",
-    "subtitle": "Lokal streak og fullføring kommer i fase 3.",
+    "subtitle": "Streak og fullførte leksjoner lagres på denne enheten.",
     "lessonsUnlocked": "Leksjoner låst opp",
     "ofCurriculum": "{pct}% av årets pensum",
     "currentStreak": "Nåværende streak",
-    "phase3": "Aktiveres i fase 3"
+    "streakHint": "Fullfør minst én leksjon hver ukedag. Helger bryter ikke streaken.",
+    "streakEmpty": "Merk en leksjon som lest på en ukedag for å komme i gang.",
+    "longestStreak": "Beste streak: {count} ukedager",
+    "completed": "Lest",
+    "favorites": "Favoritter",
+    "viewFavorites": "Se favoritter i arkivet",
+    "localNote": "Fremgang lagres lokalt i nettleseren — ikke synkronisert på tvers av enheter."
   },
   "settings": {
     "title": "Innstillinger",
@@ -130,6 +146,10 @@
     "installTitle": "Installer Mythos",
     "installBody": "Legg Mythos på hjemskjermen på iPhone for en app-lignende opplevelse med offline-støtte.",
     "installGuide": "Installasjonsveiledning",
+    "progressTitle": "Din fremgang",
+    "progressBody": "Fullførte leksjoner, favoritter og streak lagres kun på denne enheten.",
+    "clearProgress": "Slett lokal fremgang",
+    "clearProgressConfirm": "Slette alle fullførte leksjoner, favoritter og streak-data på denne enheten?",
     "studioTitle": "Innholdsstudio",
     "openStudio": "Åpne Sanity Studio →"
   },

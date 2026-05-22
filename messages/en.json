@@ -20,8 +20,10 @@
     "title": "Today's lesson",
     "subtitleWeekday": "One myth at a time. Under three minutes.",
     "subtitleWeekend": "Weekends are for review — browse the archive or revisit favorites.",
-    "streakTitle": "Streak tracking",
-    "streakComing": "Coming in Phase 3",
+    "streakTitle": "Weekday streak",
+    "streakActive": "{count, plural, one {# weekday in a row} other {# weekdays in a row}}",
+    "streakEmpty": "Complete a lesson on a weekday to start your streak.",
+    "streakCountAria": "Current streak: {count} weekdays",
     "readLesson": "Read lesson",
     "emptyTitle": "No lesson published yet",
     "emptyBody": "Add lessons in Sanity Studio, or run the seed script for Week 1 samples.",
@@ -47,6 +49,10 @@
     "filterAll": "All",
     "filterUnlocked": "Unlocked",
     "filterLocked": "Locked",
+    "filterCompleted": "Completed",
+    "filterFavorites": "Favorites",
+    "completedBadge": "Completed",
+    "favoriteBadge": "Favorite",
     "weekFilter": "Week",
     "allWeeks": "All weeks",
     "categoryFilter": "Category",
@@ -80,7 +86,11 @@
     "whyItMatters": "Why it matters",
     "keyTakeaway": "Key takeaway",
     "relatedLessons": "Related lessons",
-    "minRead": "{minutes} min"
+    "minRead": "{minutes} min",
+    "markComplete": "Mark as read",
+    "markedComplete": "Marked as read",
+    "addFavorite": "Add to favorites",
+    "favorited": "In favorites"
   },
   "explore": {
     "title": "Explore",
@@ -117,11 +127,17 @@
   },
   "progress": {
     "title": "Progress",
-    "subtitle": "Local streaks and completion tracking arrive in Phase 3.",
+    "subtitle": "Your streaks and completed lessons are saved on this device.",
     "lessonsUnlocked": "Lessons unlocked",
     "ofCurriculum": "{pct}% of the year curriculum",
     "currentStreak": "Current streak",
-    "phase3": "Enable in Phase 3"
+    "streakHint": "Complete at least one lesson each weekday. Weekends don't break your streak.",
+    "streakEmpty": "Mark a lesson as read on a weekday to begin.",
+    "longestStreak": "Best streak: {count} weekdays",
+    "completed": "Read",
+    "favorites": "Favorites",
+    "viewFavorites": "View favorites in archive",
+    "localNote": "Progress is stored locally in your browser — not synced across devices."
   },
   "settings": {
     "title": "Settings",
@@ -130,6 +146,10 @@
     "installTitle": "Install Mythos",
     "installBody": "Add Mythos to your iPhone home screen for a native, offline-ready experience.",
     "installGuide": "Installation guide",
+    "progressTitle": "Your progress",
+    "progressBody": "Completed lessons, favorites, and streaks are stored on this device only.",
+    "clearProgress": "Clear local progress",
+    "clearProgressConfirm": "Clear all completed lessons, favorites, and streak data on this device?",
     "studioTitle": "Content studio",
     "openStudio": "Open Sanity Studio →"
   },

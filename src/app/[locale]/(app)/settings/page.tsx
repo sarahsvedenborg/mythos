@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { ClearProgressButton } from "@/components/clear-progress-button";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { PageHeader } from "@/components/page-header";
 import { buttonVariants } from "@/components/ui/button";
@@ -35,6 +36,16 @@ export default async function SettingsPage() {
             >
               {t("installGuide")}
             </Link>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">{t("progressTitle")}</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">{t("progressBody")}</p>
+            <ClearProgressButton />
           </CardContent>
         </Card>
 

@@ -2,7 +2,12 @@ import type { LessonCard } from "@/types/lesson";
 import { isLessonUnlocked } from "@/lib/lessons";
 
 export type ArchiveView = "week" | "category";
-export type ArchiveFilter = "all" | "unlocked" | "locked";
+export type ArchiveFilter =
+  | "all"
+  | "unlocked"
+  | "locked"
+  | "completed"
+  | "favorites";
 
 export const LESSON_CATEGORIES = [
   "cosmos",
@@ -58,10 +63,16 @@ export function searchLessons(lessons: LessonCard[], query: string): LessonCard[
   });
 }
 
+export type ProgressFilterSets = {
+  completed: Set<number>;
+  favorites: Set<number>;
+};
+
 export function filterLessons(
   lessons: LessonCard[],
   filters: ArchiveFiltersState,
-  now = new Date()
+  now = new Date(),
+  progress?: ProgressFilterSets
 ): LessonCard[] {
   let result = lessons;
 
@@ -69,6 +80,14 @@ export function filterLessons(
     result = result.filter((l) => isLessonUnlocked(l, now));
   } else if (filters.availability === "locked") {
     result = result.filter((l) => !isLessonUnlocked(l, now));
+  } else if (filters.availability === "completed") {
+    result = progress
+      ? result.filter((l) => progress.completed.has(l.lessonNumber))
+      : [];
+  } else if (filters.availability === "favorites") {
+    result = progress
+      ? result.filter((l) => progress.favorites.has(l.lessonNumber))
+      : [];
   }
 
   if (filters.week !== null) {

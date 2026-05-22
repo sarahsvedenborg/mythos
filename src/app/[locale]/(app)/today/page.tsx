@@ -1,7 +1,7 @@
 import { getLocale, getTranslations } from "next-intl/server";
-import { Flame } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { LessonCard } from "@/components/lesson-card";
+import { StreakDisplay } from "@/components/streak-display";
 import { PageHeader } from "@/components/page-header";
 import { TodayUnlockInfo } from "@/components/today-unlock-info";
 import { buttonVariants } from "@/components/ui/button";
@@ -34,13 +34,7 @@ export default async function TodayPage() {
 
       <TodayUnlockInfo lessons={lessons} hasTodayLesson={!!today} />
 
-      <div className="mb-6 flex items-center gap-3 rounded-2xl border border-gold/20 bg-gold/5 px-4 py-3">
-        <Flame className="size-5 text-gold" aria-hidden />
-        <div>
-          <p className="text-sm font-medium">{t("streakTitle")}</p>
-          <p className="text-xs text-muted-foreground">{t("streakComing")}</p>
-        </div>
-      </div>
+      <StreakDisplay />
 
       {today ? (
         <div className="space-y-4">
