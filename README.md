@@ -59,6 +59,10 @@ Open [http://localhost:3000](http://localhost:3000) — redirects to **Today**.
 npm run seed:week1      # Week 1 (lessons 1–5) — English
 npm run seed:week1:no   # Week 1 (lessons 1–5) — Norwegian
 npm run seed:quarter1   # Weeks 2–13 (lessons 6–65) — English + Norwegian
+npm run seed:quarter2   # Weeks 14–26 (lessons 66–130) — English + Norwegian
+npm run seed:explore-starter  # 12 gods, 8 concepts, 6 places (EN + NO)
+npm run seed:explore-quarter3  # Q3 explore: 15 chars, 8 concepts, 6 places (lessons 131–195)
+npm run seed:quarter3   # Weeks 27–39 (lessons 131–195) — English + Norwegian
 ```
 
 Requires `SANITY_API_WRITE_TOKEN` in `.env.local`. Publish any drafts in Studio after seeding.
@@ -67,6 +71,9 @@ Requires `SANITY_API_WRITE_TOKEN` in `.env.local`. Publish any drafts in Studio 
 |-------|-------|---------|
 | Week 1 scripts | 1 | 1–5 |
 | Quarter 1 script | 2–13 | 6–65 |
+| Quarter 2 script | 14–26 | 66–130 |
+| Explore starter | — | 12 characters, 8 concepts, 6 locations (per locale) |
+| Quarter 3 script | 27–39 | 131–195 |
 
 ### Deploy schema changes
 
