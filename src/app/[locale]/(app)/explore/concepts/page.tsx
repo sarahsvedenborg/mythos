@@ -3,38 +3,35 @@ import { PageHeader } from "@/components/page-header";
 import { ExploreList } from "@/components/explore-list";
 import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
-import { CHARACTERS_QUERY } from "@/sanity/lib/queries";
+import { CONCEPTS_QUERY } from "@/sanity/lib/queries";
 import type { Locale } from "@/i18n/routing";
-import type { CharacterSummary } from "@/types/lesson";
+import type { ConceptSummary } from "@/types/lesson";
 
 export const revalidate = 60;
 
-export default async function CharactersPage() {
+export default async function ConceptsPage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("explore");
-  const characters = await client.fetch<CharacterSummary[]>(
-    CHARACTERS_QUERY,
-    queryParams(locale)
-  );
+  const concepts = await client.fetch<ConceptSummary[]>(CONCEPTS_QUERY, queryParams(locale));
 
-  const items = characters.map((c) => ({
+  const items = concepts.map((c) => ({
     id: c._id,
-    name: c.name,
+    name: c.term,
     slug: c.slug,
-    meta: c.type,
-    href: `/explore/characters/${c.slug}`,
+    meta: undefined,
+    href: `/explore/concepts/${c.slug}`,
   }));
 
   return (
     <div>
       <PageHeader
-        title={t("charactersTitle")}
-        subtitle={t("charactersCount", { count: characters.length })}
+        title={t("conceptsTitle")}
+        subtitle={t("conceptsCount", { count: concepts.length })}
       />
       <ExploreList
         items={items}
-        searchPlaceholder={t("searchCharacters")}
-        emptyMessage={t("noCharacters")}
+        searchPlaceholder={t("searchConcepts")}
+        emptyMessage={t("noConcepts")}
       />
     </div>
   );

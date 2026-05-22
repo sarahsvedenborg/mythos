@@ -98,3 +98,65 @@ export const CHARACTER_BY_SLUG_QUERY = defineQuery(
     }
   }`
 );
+
+export const CONCEPTS_QUERY = defineQuery(
+  `*[_type == "concept" && ${LOCALE_FILTER}] | order(term asc) {
+    _id,
+    term,
+    "slug": slug.current,
+    definition
+  }`
+);
+
+export const CONCEPT_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "concept" && slug.current == $slug && ${LOCALE_FILTER}][0] {
+    _id,
+    term,
+    "slug": slug.current,
+    definition,
+    "relatedLessons": relatedLessons[]->{
+      _id,
+      title,
+      "slug": slug.current,
+      lessonNumber,
+      shortHook
+    }
+  }`
+);
+
+export const LOCATIONS_QUERY = defineQuery(
+  `*[_type == "location" && ${LOCALE_FILTER}] | order(name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    myths,
+    image
+  }`
+);
+
+export const LOCATION_BY_SLUG_QUERY = defineQuery(
+  `*[_type == "location" && slug.current == $slug && ${LOCALE_FILTER}][0] {
+    _id,
+    name,
+    "slug": slug.current,
+    description,
+    myths,
+    image,
+    "relatedLessons": relatedLessons[]->{
+      _id,
+      title,
+      "slug": slug.current,
+      lessonNumber,
+      shortHook
+    }
+  }`
+);
+
+export const LESSONS_SEARCH_QUERY = defineQuery(
+  `*[_type == "lesson" && ${LOCALE_FILTER} && (
+    title match $q ||
+    shortHook match $q ||
+    takeaway match $q ||
+    $exact in tags
+  )] | order(lessonNumber asc) ${LESSON_CARD_FIELDS}`
+);

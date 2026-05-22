@@ -9,15 +9,19 @@ A mobile-first Progressive Web App for daily Greek mythology micro-lessons. Buil
 - Sanity content filtered by `locale` field on each document
 - Language switcher in **Settings**
 
-## Phase 1 (current)
+## Phase 1
 
 - Next.js App Router with dark, mythology-inspired UI
 - Embedded Sanity Studio at `/studio`
 - Content types: `lesson`, `character`, `concept`, `location`
 - Lesson rendering with Portable Text
-- Weekday unlock logic (Mon–Fri, 260-lesson curriculum)
 - PWA manifest + Serwist service worker (production)
-- Routes: Today, Archive, Explore, Progress, Settings, Install
+
+## Phase 2 (current)
+
+- **Archive**: search, filters (week, category, type, locked/unlocked), week vs category views
+- **Explore**: global search, character/concept/place detail pages, filtered god/hero/monster lists
+- **Today**: next-unlock schedule with local timezone, weekend archive prompt
 
 ## Sanity project
 
@@ -68,7 +72,7 @@ Full outline is in the product PRD.
 
 | Phase | Focus |
 |-------|--------|
-| **2** | Archive search, richer explore, unlock polish |
+| **2** | Done — archive search/filters, explore detail pages, unlock polish |
 | **3** | Streaks, favorites, localStorage progress |
 | **4** | Offline lesson cache, push notifications |
 | **5** | Gamification, quizzes, audio |

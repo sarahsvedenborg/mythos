@@ -4,41 +4,51 @@ import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { queryParams } from "@/lib/sanity-fetch";
 import { client } from "@/sanity/lib/client";
-import { CHARACTERS_QUERY } from "@/sanity/lib/queries";
+import { ALL_LESSONS_QUERY, CHARACTERS_QUERY } from "@/sanity/lib/queries";
 import type { Locale } from "@/i18n/routing";
-import type { CharacterSummary } from "@/types/lesson";
+import type { CharacterSummary, LessonCard } from "@/types/lesson";
+import { ExploreHubSearch } from "@/components/explore-hub-search";
 
 export const revalidate = 60;
 
 export default async function ExplorePage() {
   const locale = (await getLocale()) as Locale;
   const t = await getTranslations("explore");
-  const characters = await client.fetch<CharacterSummary[]>(
-    CHARACTERS_QUERY,
-    queryParams(locale)
-  );
+  const [characters, lessons] = await Promise.all([
+    client.fetch<CharacterSummary[]>(CHARACTERS_QUERY, queryParams(locale)),
+    client.fetch<LessonCard[]>(ALL_LESSONS_QUERY, queryParams(locale)),
+  ]);
 
-  const categories = [
-    { href: "/explore/characters" as const, label: t("allCharacters") },
-    { href: "/explore/gods" as const, label: t("gods") },
-    { href: "/explore/heroes" as const, label: t("heroes") },
-    { href: "/explore/monsters" as const, label: t("monsters") },
+  const sections = [
+    { href: "/explore/characters" as const, label: t("allCharacters"), desc: t("browsePantheon") },
+    { href: "/explore/gods" as const, label: t("gods"), desc: t("browsePantheon") },
+    { href: "/explore/heroes" as const, label: t("heroes"), desc: t("browsePantheon") },
+    { href: "/explore/monsters" as const, label: t("monsters"), desc: t("browsePantheon") },
+    { href: "/explore/concepts" as const, label: t("conceptsTitle"), desc: t("conceptsDesc") },
+    { href: "/explore/places" as const, label: t("placesTitle"), desc: t("placesDesc") },
   ];
 
   return (
     <div>
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
+      <ExploreHubSearch
+        lessons={lessons}
+        characters={characters}
+        searchPlaceholder={t("searchAll")}
+        lessonsLabel={t("lessonResults")}
+        charactersLabel={t("characterResults")}
+        noResults={t("noSearchResults")}
+      />
+
       <div className="mb-8 grid gap-3 sm:grid-cols-2">
-        {categories.map(({ href, label }) => (
+        {sections.map(({ href, label, desc }) => (
           <Link key={href} href={href}>
-            <Card className="transition-colors hover:border-gold/40">
+            <Card className="h-full transition-colors hover:border-gold/40">
               <CardHeader className="pb-2">
                 <CardTitle className="text-base">{label}</CardTitle>
               </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                {t("browsePantheon")}
-              </CardContent>
+              <CardContent className="text-sm text-muted-foreground">{desc}</CardContent>
             </Card>
           </Link>
         ))}
