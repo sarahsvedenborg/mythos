@@ -32,7 +32,10 @@
     "nextUnlock": "Next: {title} unlocks {date}",
     "timezoneNote": "Unlock times use your timezone ({zone}).",
     "weekendReview": "No new lesson on weekends — perfect time to explore the archive.",
-    "browseArchive": "Browse the archive"
+    "browseArchive": "Browse the archive",
+    "caughtUpTitle": "You're all caught up",
+    "caughtUpBody": "You've finished every unlocked lesson. Revisit the archive or wait for the next one to unlock.",
+    "caughtUpShort": "All unlocked lessons complete — next one unlocks soon."
   },
   "archive": {
     "title": "Archive",

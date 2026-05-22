@@ -32,7 +32,10 @@
     "nextUnlock": "Neste: {title} låses opp {date}",
     "timezoneNote": "Opplåsingstider bruker din tidssone ({zone}).",
     "weekendReview": "Ingen ny leksjon i helgen — perfekt tid å utforske arkivet.",
-    "browseArchive": "Bla i arkivet"
+    "browseArchive": "Bla i arkivet",
+    "caughtUpTitle": "Du er ajour",
+    "caughtUpBody": "Du har fullført alle opplåste leksjoner. Besøk arkivet eller vent på neste opplåsing.",
+    "caughtUpShort": "Alle opplåste leksjoner er fullført — neste låses opp snart."
   },
   "archive": {
     "title": "Arkiv",

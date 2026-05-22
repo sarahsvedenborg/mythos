@@ -4,15 +4,16 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { CalendarClock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useTodayHasLesson } from "@/components/today-lesson";
 import { formatUnlockDate, getNextLockedLesson, isWeekend } from "@/lib/lessons";
 import type { LessonCard } from "@/types/lesson";
 
 type Props = {
   lessons: LessonCard[];
-  hasTodayLesson: boolean;
 };
 
-export function TodayUnlockInfo({ lessons, hasTodayLesson }: Props) {
+export function TodayUnlockInfo({ lessons }: Props) {
+  const hasTodayLesson = useTodayHasLesson(lessons);
   const t = useTranslations("today");
   const locale = useLocale();
   const [timeZone, setTimeZone] = useState<string | undefined>();
@@ -46,8 +47,10 @@ export function TodayUnlockInfo({ lessons, hasTodayLesson }: Props) {
     <div className="mb-6 flex gap-3 rounded-2xl border border-border/60 bg-secondary/20 px-4 py-3">
       <CalendarClock className="size-5 shrink-0 text-gold" aria-hidden />
       <div className="min-w-0">
-        {hasTodayLesson ? (
+        {hasTodayLesson === true ? (
           <p className="text-sm text-foreground/90">{t("todayReady")}</p>
+        ) : hasTodayLesson === false ? (
+          <p className="text-sm text-foreground/90">{t("caughtUpShort")}</p>
         ) : null}
         <p className="text-sm text-muted-foreground">
           {t("nextUnlock", { title: nextLocked.title, date: dateLabel })}
