@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mythos — Learn Greek Mythology Daily
 
-## Getting Started
+A mobile-first Progressive Web App for daily Greek mythology micro-lessons. Built with **Next.js 16**, **Sanity CMS**, **Tailwind CSS**, **shadcn/ui**, and **Framer Motion**.
 
-First, run the development server:
+## Phase 1 (current)
+
+- Next.js App Router with dark, mythology-inspired UI
+- Embedded Sanity Studio at `/studio`
+- Content types: `lesson`, `character`, `concept`, `location`
+- Lesson rendering with Portable Text
+- Weekday unlock logic (Mon–Fri, 260-lesson curriculum)
+- PWA manifest + Serwist service worker (production)
+- Routes: Today, Archive, Explore, Progress, Settings, Install
+
+## Sanity project
+
+| | |
+|---|---|
+| **Project** | Mythos - Greek Mythology |
+| **Project ID** | `mff8k4rr` |
+| **Dataset** | `production` |
+
+Manage content at [sanity.io/manage](https://www.sanity.io/manage) or locally at [http://localhost:3000/studio](http://localhost:3000/studio).
+
+## Quick start
 
 ```bash
+cp .env.example .env.local
+# Add SANITY_API_WRITE_TOKEN from sanity.io/manage → API → Tokens (Editor)
+
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — redirects to **Today**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Seed Week 1 sample lessons
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run seed:week1
+```
 
-## Learn More
+Then publish drafts in Studio (or use the API). Lesson 1 (*Chaos*) is already published as a starter.
 
-To learn more about Next.js, take a look at the following resources:
+### Deploy schema changes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run sanity:deploy
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Curriculum
 
-## Deploy on Vercel
+- **260 weekday lessons** (52 weeks × 5 days)
+- Curriculum start date: **5 January 2026** (configurable in `src/lib/lessons.ts`)
+- Monday = Character · Tuesday = Story · Wednesday = Concept · Thursday = Entity · Friday = Theme
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Full outline is in the product PRD.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Roadmap (from PRD)
+
+| Phase | Focus |
+|-------|--------|
+| **2** | Archive search, richer explore, unlock polish |
+| **3** | Streaks, favorites, localStorage progress |
+| **4** | Offline lesson cache, push notifications |
+| **5** | Gamification, quizzes, audio |
+
+## Tech notes
+
+- **Build**: `npm run build` uses webpack (required for Serwist + Studio bundle).
+- **PWA**: Service worker is disabled in development; install on iPhone via Safari → Share → Add to Home Screen.
+- **Images**: Host on Sanity CDN; remote pattern configured in `next.config.ts`.
+
+## License
+
+Private — see repository owner.
